@@ -1,0 +1,5 @@
+# OSU MPI_Put-CUDA Latency Test v5.6.2
+# Window creation: MPI_Win_allocate
+# Synchronization: MPI_Win_post/start/complete/wait
+# Rank 0 Memory on HOST (H) and Rank 1 Memory on DEVICE (D)
+# Size          Latency (us)

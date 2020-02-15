@@ -1,0 +1,28 @@
+# OSU MPI_Get-CUDA Bandwidth Test v5.6.2
+# Window creation: MPI_Win_create_dynamic
+# Synchronization: MPI_Win_lock/unlock
+# Rank 0 Memory on DEVICE (D) and Rank 1 Memory on HOST (H)
+# Size      Bandwidth (MB/s)
+1                       0.08
+2                       0.17
+4                       0.34
+8                       0.67
+16                      1.35
+32                      2.70
+64                      5.40
+128                    10.86
+256                    21.75
+512                    43.47
+1024                   86.83
+2048                  173.59
+4096                  344.37
+8192                  685.51
+16384                1341.44
+32768                2647.21
+65536                5099.82
+131072               9208.45
+262144              12040.72
+524288              12228.19
+1048576             10085.39
+2097152             11080.98
+4194304             11190.82

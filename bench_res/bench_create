@@ -1,0 +1,82 @@
+#!/bin/bash
+
+NUM_NODES=$1
+
+BENCH_TYPE="$2" # collective, one-sided, pt2pt, startup
+DEVICE_TYPE="$3" # d2h, h2d, d2d, h2h
+WINDOW_TYPE="$4" # create, allocate, dynamic
+SYNC_TYPE="$5" # flush, flush_local, lock, lock_all, pscw, fence
+RUN_TYPE="$6"  # latency, bw, put_latency, get_latency, get_bw, put_bw
+
+NUM_RANKS_PER_PROC=1
+
+EXEC_DIR=$PWD
+EXEC_COMMON="../libexec/osu-micro-benchmarks/mpi/${BENCH_TYPE}/osu_${RUN_TYPE}"
+BENCH_TYPE_DIR="${BENCH_TYPE}"
+JOB_SCRIPT_NAME="job_script_${RUN_TYPE}.sh"
+
+RESULTS_DIR=${EXEC_DIR}/${BENCH_TYPE_DIR}
+
+mkdir -p $RESULTS_DIR
+cd $RESULTS_DIR
+
+NN_DIR="${NUM_NODES}nodes"
+DEVICE_DIR="${DEVICE_TYPE}"
+WINDOW_TYPE_DIR="${WINDOW_TYPE}"
+SYNC_TYPE_DIR="${SYNC_TYPE}"
+JOB_NAME="${NUM_NODES}-${RUN_TYPE}-${BENCH_TYPE}"
+
+mkdir -p $NN_DIR
+cd $NN_DIR
+
+mkdir -p $DEVICE_DIR
+cd $DEVICE_DIR
+
+
+if [ "$DEVICE_TYPE" = "d2h" ]; then
+    DEVICE_FLAGS="D H"
+elif [ "$DEVICE_TYPE" = "h2h" ]; then
+    DEVICE_FLAGS="H H"
+elif [ "$DEVICE_TYPE" = "d2d" ]; then
+    DEVICE_FLAGS="D D"
+elif [ "$DEVICE_TYPE" = "h2d" ]; then
+    DEVICE_FLAGS="H D"
+fi
+
+
+if [ "$BENCH_TYPE" = "one-sided" ]; then
+    mkdir -p $WINDOW_TYPE_DIR
+    cd $WINDOW_TYPE_DIR
+
+    mkdir -p $SYNC_TYPE_DIR
+    cd $SYNC_TYPE_DIR
+
+    run_flags="-w "${WINDOW_TYPE}" -s "${SYNC_TYPE}" "${DEVICE_FLAGS}""
+else
+
+    run_flags=""${DEVICE_FLAGS}""
+fi
+
+run_exec=""${EXEC_DIR}"/"${EXEC_COMMON}" "${run_flags}" > "${RUN_TYPE}".csv"
+add_flags="-d packed -b packed:1 --latency_priority gpu-cpu"
+
+echo "#!/bin/bash -l" > ${JOB_SCRIPT_NAME}
+echo "#BSUB -o output-$JOB_NAME" >> ${JOB_SCRIPT_NAME}
+echo "#BSUB -e error-$JOB_NAME" >> ${JOB_SCRIPT_NAME}
+echo "#BSUB -J $JOB_NAME" >> ${JOB_SCRIPT_NAME}
+echo "#BSUB -nnodes $NUM_NODES" >> ${JOB_SCRIPT_NAME}
+echo "#BSUB -alloc_flags \"smt1\" " >> ${JOB_SCRIPT_NAME}
+echo "#BSUB -P $PROJECT_NAME" >> ${JOB_SCRIPT_NAME}
+echo "#BSUB -W 00:15" >> ${JOB_SCRIPT_NAME}
+
+NUM_RES_SETS="$((${NUM_NODES}*1))"
+if [ "$NUM_NODES" = "1" ];then
+    NUM_PROCS=2
+else
+    NUM_PROCS=1
+fi
+
+echo "date" >> ${JOB_SCRIPT_NAME}
+echo "export OMP_NUM_THREADS=1" >> ${JOB_SCRIPT_NAME}
+echo "jsrun --smpiargs=\"-gpu \" -n ${NUM_RES_SETS} -a ${NUM_PROCS} -g ${NUM_PROCS} -c ${NUM_PROCS} -r ${NUM_RANKS_PER_PROC} $add_flags  $run_exec " >> ${JOB_SCRIPT_NAME}
+bsub ${JOB_SCRIPT_NAME}

@@ -1,0 +1,28 @@
+# OSU MPI_Get-CUDA latency Test v5.6.2
+# Window creation: MPI_Win_allocate
+# Synchronization: MPI_Win_flush
+# Rank 0 Memory on HOST (H) and Rank 1 Memory on DEVICE (D)
+# Size          Latency (us)
+1                      37.15
+2                      37.10
+4                      37.11
+8                      37.25
+16                     37.27
+32                     37.14
+64                     37.16
+128                    37.08
+256                    36.99
+512                    37.00
+1024                   37.06
+2048                   37.10
+4096                   37.35
+8192                   37.98
+16384                  38.30
+32768                  39.23
+65536                  41.45
+131072                 46.50
+262144                 57.24
+524288                 77.10
+1048576               116.20
+2097152               176.99
+4194304               295.75

@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# NUM_NODES=$1
+# BENCH_TYPE="$2" # collective, one-sided, pt2pt, startup
+# DEVICE_TYPE="$3" # d2h, h2d, d2d, h2h
+# WINDOW_TYPE="$4" # create, allocate, dynamic
+# SYNC_TYPE="$5" # flush, flush_local, lock, lock_all, pscw, fence
+# RUN_TYPE="$6"  # latency, bw
+
+# for num_nodes in 1 2
+# do
+#     for bench in "pt2pt"
+#     do
+#         for dev in "d2h" "h2h" "h2d" "d2d"
+#         do
+#             for run in "bw" "latency"
+#             do
+#                 echo ./bench_create $num_nodes $bench $dev create flush $run
+#             done
+#         done
+#     done
+# done
+
+for num_nodes in 1 2
+do
+    for bench in "one-sided"
+    do
+        for dev in "d2h" "h2h" "h2d" "d2d"
+        do
+            for window in "create" "allocate" "dynamic"
+            do
+                for sync in "flush_local"
+                do
+                    for run in "put_bw" "get_bw" "get_latency" "put_latency" 
+                    do
+                        echo ./bench_create $num_nodes $bench $dev $window $sync $run
+                    done
+                done
+            done
+        done
+    done
+done
+
+# for sync in "flush" "flush_all" "lock" "lock_all" "pscw" "fence"

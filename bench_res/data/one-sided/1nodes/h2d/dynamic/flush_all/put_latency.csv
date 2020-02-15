@@ -1,0 +1,35 @@
+Usage: osu_put_latency [options] [SRC DST]
+
+SRC and DST are buffer types for the source and destination
+SRC and DST may be `D' or `H' which specifies whether
+the buffer is allocated on the accelerator device or host
+memory for each mpi rank
+
+Options:
+  -d --accelerator <type>       accelerator device buffers can be of <type> `cuda' or `openacc'
+
+  -w --win-option <win_option>
+            <win_option> can be any of the follows:
+            create            use MPI_Win_create to create an MPI Window object
+            allocate          use MPI_Win_allocate to create an MPI Window object (not valid when using device memory)
+            dynamic           use MPI_Win_create_dynamic to create an MPI Window object
+
+  -s, --sync-option <sync_option>
+            <sync_option> can be any of the follows:
+            pscw              use Post/Start/Complete/Wait synchronization calls 
+            fence             use MPI_Win_fence synchronization call
+            lock              use MPI_Win_lock/unlock synchronizations calls
+            flush             use MPI_Win_flush synchronization call
+            flush_local       use MPI_Win_flush_local synchronization call
+            lock_all          use MPI_Win_lock_all/unlock_all synchronization calls
+
+  -m, --message-size          [MIN:]MAX  set the minimum and/or the maximum message size to MIN and/or MAX
+                              bytes respectively. Examples:
+                              -m 128      // min = default, max = 128
+                              -m 2:128    // min = 2, max = 128
+                              -m 2:       // min = 2, max = default
+  -M, --mem-limit SIZE        set per process maximum memory consumption to SIZE bytes
+                              (default 536870912)
+  -x, --warmup ITER           number of warmup iterations to skip before timing(default 100)
+  -i, --iterations ITER       number of iterations for timing (default 10000)
+  -h, --help                  print this help message
