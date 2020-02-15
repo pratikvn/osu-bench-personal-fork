@@ -1,0 +1,130 @@
+\documentclass[]{article}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{eurosym}
+\usepackage{float}
+\usepackage{xspace}
+\usepackage{pgffor}
+\usepackage{xprintlen}
+\usepackage{geometry}
+\usepackage[table]{xcolor}
+\usepackage{subfig}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{tabularx}
+\usepackage{amsmath}
+\usepackage[export]{adjustbox}
+\usepackage{eurosym}
+\usepackage{xcolor,colortbl}
+\usepackage{balance}
+\usepackage{wrapfig}
+\usepackage{tikz}
+%opening
+\title{Plots }
+\author{Pratik Nayak, pratik.nayak@protonmail.com}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+
+\end{abstract}
+
+
+\begin{figure}
+	\input{../2nodes_get_latency_d2d_sync_summit.tex}
+	\caption{2 nodes, get latency, gpu-gpu, window create, sync algorithm comparisons}
+\end{figure}
+
+\begin{figure}
+	\input{../2nodes_get_latency_h2h_sync_summit.tex}
+	\caption{2 nodes, get latency, cpu-cpu, window create, sync algorithm comparisons}
+\end{figure}
+
+\begin{figure}
+	\input{../1nodes_get_latency_d2d_sync_summit.tex}
+	\caption{1 node, get latency, gpu-gpu, window create, sync algorithm comparisons}
+\end{figure}
+
+\begin{figure}
+	\input{../1nodes_get_latency_h2h_sync_summit.tex}
+	\caption{1 node, get latency, cpu-cpu, window create, sync algorithm comparisons}
+\end{figure}
+
+\begin{figure}
+	\input{../1nodes_get_bw_d2d_sync_summit.tex}
+	\caption{1 node, get bw, gpu-gpu, window create, sync algorithm comparisons}
+\end{figure}
+
+\begin{figure}
+	\input{../1nodes_get_bw_h2h_sync_summit.tex}
+	\caption{1 node, get bw, cpu-cpu, window create, sync algorithm comparisons}
+\end{figure}
+
+\begin{figure}
+	\input{../2nodes_get_latency_d2d_window_summit.tex}
+	\caption{2 nodes, get latency, gpu-gpu, flush-local, window algorithm comparisons}
+\end{figure}
+
+\begin{figure}
+	\input{../2nodes_get_latency_h2h_window_summit.tex}
+	\caption{2 nodes, get latency, cpu-cpu, flush-local, window algorithm comparisons}
+\end{figure}
+
+\begin{figure}
+	\input{../1nodes_get_latency_d2d_window_summit.tex}
+	\caption{1 node, get latency, gpu-gpu, flush-local, window algorithm comparisons}
+\end{figure}
+
+\begin{figure}
+	\input{../1nodes_get_latency_h2h_window_summit.tex}
+	\caption{1 node, get latency, cpu-cpu, flush-local, window algorithm comparisons}
+\end{figure}
+
+\begin{figure}
+	\input{../2nodes_get_bw_h2h_window_summit.tex}
+	\caption{2 nodes, get bw, cpu-cpu, flush-local, window algorithm comparisons}
+\end{figure}
+
+\begin{figure}
+	\input{../1nodes_get_bw_d2d_window_summit.tex}
+	\caption{1 node, get bw, gpu-gpu, flush-local, window algorithm comparisons}
+\end{figure}
+
+\begin{figure}
+	\input{../1nodes_get_bw_h2h_window_summit.tex}
+	\caption{1 node, get bw, cpu-cpu, flush-local, window algorithm comparisons}
+\end{figure}
+
+\begin{figure}
+	\input{../2nodes_latency_d2d_bench_summit.tex}
+	\caption{2 node, latency, gpu-gpu, flush-local, create window, one-sided, two-sided comparisons}
+\end{figure}
+
+\begin{figure}
+	\input{../1nodes_latency_d2d_bench_summit.tex}
+	\caption{1 node, latency, gpu-gpu, flush-local, create window, one-sided, two-sided comparisons}
+\end{figure}
+
+\begin{figure}
+	\input{../1nodes_bw_d2d_bench_summit.tex}
+	\caption{1 node, bw, gpu-gpu, flush-local, create window, one-sided, two-sided comparisons}
+\end{figure}
+
+\begin{figure}
+	\input{../2nodes_latency_h2h_bench_summit.tex}
+	\caption{2 node, latency, cpu-cpu, flush-local, create window, one-sided, two-sided comparisons}
+\end{figure}
+
+\begin{figure}
+	\input{../1nodes_latency_h2h_bench_summit.tex}
+	\caption{1 node, latency, cpu-cpu, flush-local, create window, one-sided, two-sided comparisons}
+\end{figure}
+
+\begin{figure}
+	\input{../1nodes_bw_h2h_bench_summit.tex}
+	\caption{1 node, bw, cpu-cpu, flush-local, create window, one-sided, two-sided comparisons}
+\end{figure}
+
+\end{document}

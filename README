@@ -1,3 +1,12 @@
+This repository is a personal fork of the OSU Micro-Benchmarks from OSU. It is hosted here for easy benchmarking and results display.
+
+As of now, the source code of the benchmarking suite in itself is unmodified and can be obtained directly from the OSU Micro-Benchmarks (OMB) website (https://mvapich.cse.ohio-state.edu/benchmarks/).
+
+The License for the benchmarking suite in itself is BSD-3 as listed in COPYRIGHT file.
+
+The bench_res folder contains results and scripting files. This is *NOT* part of the OMB suite. Please see bench_res/ABOUT-LICENSING.md bench_res/LICENSE 
+
+
 OMB (OSU Micro-Benchmarks)
 --------------------------
 The OSU Micro-Benchmarks use the GNU build system. Therefore you can simply
