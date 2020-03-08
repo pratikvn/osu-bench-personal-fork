@@ -7,6 +7,7 @@ This sub-folder hosts the data from benchmarks run on Summit, ORNL supercomputer
 
 Please cite it as follows:
 
+```tex
 @misc{Nayakbench2020,
   author = {Pratik Nayak},
   title = {Summit Benchmarks using the OSU Micro-Benchmarking suite},
@@ -14,5 +15,6 @@ Please cite it as follows:
   publisher = {GitHub},
   journal = {GitHub repository},
   howpublished = {\url{https://github.com/pratikvn/osu-bench-personal-fork/tree/master/bench_res}},
-  commit = {5b914b6f867ffd01e2095dc85b069b983284fc4f}
+  commit = {65eb311d1327276221e501567f0b96862a3a145b}
 }
+```
